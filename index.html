@@ -1,25 +1,21 @@
-<!DOCTYPE html>
 <html>
-<head>
-  <title>glb-viewer</title>
-  <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
-  <!-- https://github.com/fernandojsg/aframe-teleport-controls -->
-  <script src="https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js"></script>
-</head>
+  <head>
+    <!-- A-FrameをCDNから読み込む -->
+    <script src="https://aframe.io/releases/1.0.3/aframe.min.js"></script>
+    <!-- aframe-orbit-controlsをCDNから読み込む -->
+    <script src="https://unpkg.com/aframe-orbit-controls@1.2.0/dist/aframe-orbit-controls.min.js"></script>
+  </head>
 <body>
-<a-scene background="color: #333">
-  <a-assets timeout="10000">
-    <a-asset-item id="sabae" src="https://casting-3d.ashandf.net/model.glb"></a-asset-item>
-  </a-assets>
-  <a-entity gltf-model="#sabae" position="0 2 0"></a-entity>
-  <a-entity light="type: ambient; color: #FFF"></a-entity>
-  <a-entity light="type: directional; color: #FFF; intensity: 1" position="-0 2 1"></a-entity>
-    <!--<a-plane color="#888" height="300" width="300" rotation="-90 0 0"></a-plane>-->
-  <a-entity id="cameraRig">
-    <a-entity id="head" camera position="0 1.7 0" wasd-controls look-controls></a-entity>
-    <a-entity oculus-touch-controls="hand:left" teleport-controls="button:trigger; collisionEntities:.collidable; cameraRig:#cameraRig; teleportOrigin:#head;"></a-entity>
-    <a-entity oculus-touch-controls="hand:right" teleport-controls="button:trigger; collisionEntities:.collidable; cameraRig:#cameraRig; teleportOrigin:#head;"></a-entity>
-  </a-entity>
-</a-scene>
+  <a-scene>
+    <!-- aframe-orbit-controlsのプロパティを記述 -->
+    <a-entity camera look-controls orbit-controls="target: 0 1.6 -0.5; maxPolarAngle:180; minDistance: 0.5; maxDistance: 200; initialPosition: 0 0 30"></a-entity>
+    
+    <!-- 3Dモデルを読み込んで、位置やスケールなど定義する -->
+    <a-gltf-model  id="test" src="model.gltf"  position="0 -1 0" rotation="20 124 7" scale="0.1 0.1 0.1"></a-gltf-model>
+    
+    <!-- 背景色-->
+    <a-sky color="#9EA1E7"></a-sky>
+
+  </a-scene>
 </body>
 </html>
