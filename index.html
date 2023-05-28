@@ -24,7 +24,7 @@
 
         // GLTFLoader を利用する
         var loader = new THREE.GLTFLoader();
-        loader.load('./model.glb', function (gltf) {
+        loader.load('https://casting-3d.ashandf.net/model.glb', function (gltf) {
 
             // 読み込みが完了したら、モデルをシーンに追加
             scene.add(gltf.scene);
