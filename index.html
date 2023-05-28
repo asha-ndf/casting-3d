@@ -1,21 +1,38 @@
+<!doctype html>
 <html>
   <head>
-    <!-- A-FrameをCDNから読み込む -->
-    <script src="https://aframe.io/releases/1.0.3/aframe.min.js"></script>
-    <!-- aframe-orbit-controlsをCDNから読み込む -->
-    <script src="https://unpkg.com/aframe-orbit-controls@1.2.0/dist/aframe-orbit-controls.min.js"></script>
-  </head>
-<body>
-  <a-scene>
-    <!-- aframe-orbit-controlsのプロパティを記述 -->
-    <a-entity camera look-controls orbit-controls="target: 0 1.6 -0.5; maxPolarAngle:180; minDistance: 0.5; maxDistance: 200; initialPosition: 0 0 30"></a-entity>
-    
-    <!-- 3Dモデルを読み込んで、位置やスケールなど定義する -->
-    <a-gltf-model  id="test" src="model.gltf"  position="0 -1 0" rotation="20 124 7" scale="0.1 0.1 0.1"></a-gltf-model>
-    
-    <!-- 背景色-->
-    <a-sky color="#9EA1E7"></a-sky>
+    <!-- aframeの導入 -->
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
 
-  </a-scene>
-</body>
+    <title>ehe_practice</title>
+  </head>
+  <body>
+    <a-scene>
+      <!-- 3Dモデル（gltfファイル） -->
+      <a-assets>
+        <a-asset-items id="test" src="model.gltf" ></a-asset-items>
+      </a-assets>
+      <a-entity gltf-model="#test" scale="0.01 0.01 0.01"></a-entity>
+      <!-- カメラ設置 -->
+      <a-camera
+        position="0 10 30"
+        cursor-visible="true"
+        cursor-scale="5"
+        cursor-color="#0095DD"
+        cursor-opacity="1">
+      </a-camera>
+      <!-- ディレクショナルライト（平行光源）の追加 -->
+      <a-light
+        type="directional"
+        color="#FFF"
+        intensity="0.5"
+        position="-1 1 2">
+      </a-light>
+      <!-- アンビエントライトの追加（環境光） -->
+      <a-light
+        type="ambient"
+        color="#FFF">
+      </a-light>
+    </a-scene>
+  </body>
 </html>
