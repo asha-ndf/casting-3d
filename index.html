@@ -18,10 +18,10 @@
         <a-assets timeout="10000">
             <a-asset-item id="base" src="./model.glb"></a-asset-item>
         </a-assets>
-        <a-entity gltf-model="#base" position="0 0 0" scale="100 100 100" rotation="0 0 0"></a-entity>
+        <a-entity gltf-model="#base" position="0 0 0" scale="30 30 30" rotation="0 0 0"></a-entity>
         <a-entity light="type: ambient; color: #FFF"></a-entity>
         <!-- <a-sphere id="sphere" color="#f22"></a-sphere> -->
-        <a-entity id="cameraRig" position="0 0 1" rotation="0 0 0">
+        <a-entity id="cameraRig" position="0 0 5" rotation="0 0 0">
             <a-entity id="head" camera position="0 1.7 0" mc-controls look-controls x-drone-controls-mode2></a-entity>
             <a-entity oculus-touch-controls="hand:left"
                 teleport-controls="button:trigger; collisionEntities:.collidable; cameraRig:#cameraRig; teleportOrigin:#head;"></a-entity>
