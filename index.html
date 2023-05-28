@@ -1,38 +1,39 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-  <head>
-    <!-- aframeの導入 -->
-    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
 
-    <title>ehe_practice</title>
-  </head>
-  <body>
-    <a-scene>
-      <!-- 3Dモデル（gltfファイル） -->
-      <a-assets>
-        <a-asset-items id="test" src="model.gltf" ></a-asset-items>
-      </a-assets>
-      <a-entity gltf-model="#test" scale="100 100 100"></a-entity>
-      <!-- カメラ設置 -->
-      <a-camera
-        position="0 10 30"
-        cursor-visible="true"
-        cursor-scale="5"
-        cursor-color="#0095DD"
-        cursor-opacity="1">
-      </a-camera>
-      <!-- ディレクショナルライト（平行光源）の追加 -->
-      <a-light
-        type="directional"
-        color="#FFF"
-        intensity="0.5"
-        position="-10 10 20">
-      </a-light>
-      <!-- アンビエントライトの追加（環境光） -->
-      <a-light
-        type="ambient"
-        color="#FFF">
-      </a-light>
+<head>
+    <title>機械工作実習ー鋳造</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script
+        src="https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js"></script>
+    <!--
+      <script type="module" src="./drone-controls-mode2.js"></script>
+    -->
+    <script type="module" src="https://code4fukui.github.io/glb-viewer/mc-controls.js"></script>
+
+</head>
+
+<body>
+    <a-scene id="scene" background="color: #4080e0" renderer="colorManagement: true">
+        <a-assets timeout="10000">
+            <a-asset-item id="base" src="./model.glb"></a-asset-item>
+        </a-assets>
+        <a-entity gltf-model="#base" position="0 0 0" scale="100 100 100" rotation="0 0 0"></a-entity>
+        <a-entity light="type: ambient; color: #FFF"></a-entity>
+        <!-- <a-sphere id="sphere" color="#f22"></a-sphere> -->
+        <a-entity id="cameraRig" position="0 0 1" rotation="0 0 0">
+            <a-entity id="head" camera position="0 1.7 0" mc-controls look-controls x-drone-controls-mode2></a-entity>
+            <a-entity oculus-touch-controls="hand:left"
+                teleport-controls="button:trigger; collisionEntities:.collidable; cameraRig:#cameraRig; teleportOrigin:#head;"></a-entity>
+            <a-entity oculus-touch-controls="hand:right"
+                teleport-controls="button:trigger; collisionEntities:.collidable; cameraRig:#cameraRig; teleportOrigin:#head;"></a-entity>
+            <!--
+        <a-entity id="leftHand" hand-tracking-controls="hand: left;"></a-entity>
+        <a-entity id="rightHand" hand-tracking-controls="hand: right;"></a-entity>
+        -->
+        </a-entity>
     </a-scene>
-  </body>
+
+</body>
+
 </html>
