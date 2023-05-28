@@ -3,50 +3,37 @@
 
 <head>
     <title>機械工作実習-鋳造</title>
-    <meta charset="UTF-8">
-    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script
+        src="https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js"></script>
+    <!--
+      <script type="module" src="./drone-controls-mode2.js"></script>
+    -->
+    <script type="module" src="https://code4fukui.github.io/glb-viewer/mc-controls.js"></script>
+
 </head>
 
 <body>
-    <h1>機械工作実習-鋳造</h1>
-    <script>
-        // シーンを作成する
-        var scene = new THREE.Scene();
+    <a-scene id="scene" background="color: #4080e0" renderer="colorManagement: true">
+        <a-assets timeout="10000">
+            <a-asset-item id="base" src="https://casting-3d.ashandf.net/model.glb"></a-asset-item>
+        </a-assets>
+        <a-entity gltf-model="#base" position="0 0 0" scale="1 1 1" rotation="0 0 0"></a-entity>
+        <a-entity light="type: ambient; color: #FFF"></a-entity>
+        <!-- <a-sphere id="sphere" color="#f22"></a-sphere> -->
+        <a-entity id="cameraRig" position="0 0 1" rotation="0 0 0">
+            <a-entity id="head" camera position="0 1.7 0" mc-controls look-controls x-drone-controls-mode2></a-entity>
+            <a-entity oculus-touch-controls="hand:left"
+                teleport-controls="button:trigger; collisionEntities:.collidable; cameraRig:#cameraRig; teleportOrigin:#head;"></a-entity>
+            <a-entity oculus-touch-controls="hand:right"
+                teleport-controls="button:trigger; collisionEntities:.collidable; cameraRig:#cameraRig; teleportOrigin:#head;"></a-entity>
+            <!--
+        <a-entity id="leftHand" hand-tracking-controls="hand: left;"></a-entity>
+        <a-entity id="rightHand" hand-tracking-controls="hand: right;"></a-entity>
+        -->
+        </a-entity>
+    </a-scene>
 
-        // カメラを作成する
-        var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.z = 5;
-
-        // ライトを作成する
-        var light = new THREE.AmbientLight(0x404040); // soft white light
-        scene.add(light);
-
-        // GLTFLoader を利用する
-        var loader = new THREE.GLTFLoader();
-        loader.load('https://casting-3d.ashandf.net/model.glb', function (gltf) {
-
-            // 読み込みが完了したら、モデルをシーンに追加
-            scene.add(gltf.scene);
-
-        }, undefined, function (error) {
-
-            console.error(error);
-
-        });
-
-        // レンダラーを作成する
-        var renderer = new THREE.WebGLRenderer();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.body.appendChild(renderer.domElement);
-
-        // アニメーションを実行する
-        function animate() {
-            requestAnimationFrame(animate);
-            renderer.render(scene, camera);
-        }
-        animate();
-    </script>
 </body>
 
 </html>
